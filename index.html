@@ -14,7 +14,6 @@
             line-height: 1.5;
         }
 
-        /* Download overlay */
         .sos-install-overlay {
             display: none;
             position: fixed;
@@ -129,16 +128,12 @@
         .sos-prime-panel p:last-child { margin-bottom: 0; }
         .sos-prime-panel strong { color: #fff; }
 
-        /* Main container */
         .sos-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        .sos-header {
-            padding: 10px 0px;
-            border-radius: 18px;
-        }
+        .sos-header { padding: 10px 0px; border-radius: 18px; }
         .sos-header-content {
             max-width: 900px;
             margin: 0 auto;
@@ -158,11 +153,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             flex-shrink: 0;
         }
-        .sos-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .sos-icon img { width: 100%; height: 100%; object-fit: cover; }
         .sos-info { flex: 1; }
         .sos-title {
             font-size: 32px;
@@ -237,10 +228,7 @@
             max-width: 200px;
         }
         .sos-btn-secondary:hover { color: #D32F2F; }
-        .sos-share-section {
-            text-align: center;
-            margin-top: 8px;
-        }
+        .sos-share-section { text-align: center; margin-top: 8px; }
         .sos-content {
             max-width: 900px;
             margin: 0 auto;
@@ -262,15 +250,8 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #e0e0e0;
         }
-        .sos-section-title i {
-            margin-right: 8px;
-            color: #ED3237;
-        }
-        .sos-features-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+        .sos-section-title i { margin-right: 8px; color: #ED3237; }
+        .sos-features-list { list-style: none; padding: 0; margin: 0; }
         .sos-features-list li {
             padding: 8px 0;
             display: flex;
@@ -319,10 +300,7 @@
             align-items: center;
             gap: 8px;
         }
-        .sos-expect-box ol {
-            margin: 0;
-            padding-left: 18px;
-        }
+        .sos-expect-box ol { margin: 0; padding-left: 18px; }
         .sos-expect-box li {
             font-size: 13px;
             color: #BF360C;
@@ -345,11 +323,7 @@
             margin-right: 6px;
             color: #ED3237;
         }
-        .sos-changelog-items {
-            list-style: none !important;
-            padding: 0;
-            margin: 0;
-        }
+        .sos-changelog-items { list-style: none !important; padding: 0; margin: 0; }
         .sos-changelog-items li {
             color: #424242;
             font-size: 13px;
@@ -370,32 +344,8 @@
             border-radius: 6px;
             margin-bottom: 20px;
         }
-        .sos-trust-box p {
-            font-size: 12px;
-            color: #424242;
-            margin: 0;
-        }
-        .sos-trust-box i {
-            color: #ED3237;
-            margin-right: 6px;
-        }
-        .sos-downloads {
-            background: #FFEBEE;
-            padding: 20px;
-            border-radius: 18px;
-            text-align: center;
-        }
-        .sos-downloads-number {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ED3237;
-            margin: 0;
-        }
-        .sos-downloads-label {
-            font-size: 13px;
-            color: #424242;
-            margin: 5px 0 0 0;
-        }
+        .sos-trust-box p { font-size: 12px; color: #424242; margin: 0; }
+        .sos-trust-box i { color: #ED3237; margin-right: 6px; }
         .sos-about-section {
             max-width: 900px;
             margin: 0 auto;
@@ -473,10 +423,7 @@
             font-size: 13px;
             color: #424242;
         }
-        .sos-footer-links {
-            display: flex;
-            gap: 20px;
-        }
+        .sos-footer-links { display: flex; gap: 20px; }
         .sos-footer-links a {
             color: #ED3237;
             text-decoration: none;
@@ -489,11 +436,7 @@
                 align-items: center;
                 text-align: center;
             }
-            .sos-icon {
-                width: 120px;
-                height: 120px;
-                padding: 15px;
-            }
+            .sos-icon { width: 120px; height: 120px; padding: 15px; }
             .sos-title { font-size: 24px; }
             .sos-content { grid-template-columns: 1fr; }
             .sos-buttons { flex-direction: column; }
@@ -504,11 +447,10 @@
 </head>
 <body>
 
-    <!-- Download Overlay -->
     <div class="sos-install-overlay" id="sos-overlay">
         <div class="sos-install-content">
             <div class="sos-install-icon">
-                <img src="ICON_URL_HERE" alt="SOS Panic Button">
+                <img src="https://brandweaversa.github.io/sos-panic-button/app_icon.png" alt="SOS Panic Button">
             </div>
             <div class="sos-install-status" id="sos-status">
                 <i class="fas fa-download"></i> Downloading SOS Panic Button
@@ -533,12 +475,11 @@
         </div>
     </div>
 
-    <!-- Main Page -->
     <div class="sos-container">
         <div class="sos-header">
             <div class="sos-header-content">
                 <div class="sos-icon">
-                    <img src="ICON_URL_HERE" alt="SOS Panic Button">
+                    <img src="https://brandweaversa.github.io/sos-panic-button/app_icon.png" alt="SOS Panic Button">
                 </div>
                 <div class="sos-info">
                     <h1 class="sos-title"><i class="fas fa-bell"></i> SOS Panic Button</h1>
@@ -574,7 +515,6 @@
             </div>
         </div>
 
-        <!-- Content -->
         <div class="sos-content">
             <div>
                 <div>
@@ -620,7 +560,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div class="sos-sidebar">
                 <div>
                     <div class="sos-badge">
@@ -652,14 +591,13 @@
                     <p style="font-size: 13px; color: #424242; margin: 0 0 10px 0;">
                         Contact Brandweaver
                     </p>
-                    <a href="mailto:YOUR_EMAIL_HERE" style="color: #ED3237; text-decoration: none; font-weight: 600; font-size: 13px;">
-                        <i class="fas fa-envelope"></i> YOUR_EMAIL_HERE
+                    <a href="mailto:myhelpacenter@gmail.com" style="color: #ED3237; text-decoration: none; font-weight: 600; font-size: 13px;">
+                        <i class="fas fa-envelope"></i> myhelpacenter@gmail.com
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- About Section -->
         <div class="sos-about-section">
             <h2 class="sos-about-title">
                 <i class="fas fa-info-circle"></i> About this app
@@ -677,7 +615,7 @@
                 </div>
                 <div class="sos-about-meta-item">
                     <span class="sos-about-meta-label">Size</span>
-                    <span class="sos-about-meta-value">~24 MB</span>
+                    <span class="sos-about-meta-value">~51 MB</span>
                 </div>
                 <div class="sos-about-meta-item">
                     <span class="sos-about-meta-label">Version</span>
@@ -700,15 +638,14 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="sos-footer">
             <div class="sos-footer-content">
                 <div><i class="fas fa-copyright"></i> 2026 Brandweaver. Powered by Brandweaver.</div>
                 <div class="sos-footer-links">
-                    <a href="PRIVACY_POLICY_URL_HERE" target="_blank">
+                    <a href="https://brandweaversa.github.io/sos-panic-button/privacy.html" target="_blank">
                         <i class="fas fa-shield-alt"></i> Privacy Policy
                     </a>
-                    <a href="mailto:YOUR_EMAIL_HERE">
+                    <a href="mailto:myhelpacenter@gmail.com">
                         <i class="fas fa-envelope"></i> Contact
                     </a>
                 </div>
@@ -728,8 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const primePanel = document.getElementById('sos-prime-panel');
     const dotsRow = document.getElementById('sos-dots-row');
 
-    // REPLACE THIS with your actual APK download URL
-    const APK_URL = 'APK_DOWNLOAD_URL_HERE';
+    const APK_URL = 'https://github.com/Brandweaversa/sos-panic-button/releases/download/v1.3.0/app-release.apk';
 
     installBtn.addEventListener('click', function() {
         overlay.classList.add('active');
@@ -753,7 +689,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 400);
 
-        // Simulate the download prep, then redirect to the actual APK
         setTimeout(() => {
             clearInterval(progressInterval);
             progressFill.style.width = '100%';
