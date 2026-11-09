@@ -14,6 +14,7 @@
             line-height: 1.5;
         }
 
+        /* Download overlay */
         .sos-install-overlay {
             display: none;
             position: fixed;
@@ -128,12 +129,16 @@
         .sos-prime-panel p:last-child { margin-bottom: 0; }
         .sos-prime-panel strong { color: #fff; }
 
+        /* Main container */
         .sos-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        .sos-header { padding: 10px 0px; border-radius: 18px; }
+        .sos-header {
+            padding: 10px 0px;
+            border-radius: 18px;
+        }
         .sos-header-content {
             max-width: 900px;
             margin: 0 auto;
@@ -153,7 +158,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             flex-shrink: 0;
         }
-        .sos-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .sos-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .sos-info { flex: 1; }
         .sos-title {
             font-size: 32px;
@@ -228,7 +237,10 @@
             max-width: 200px;
         }
         .sos-btn-secondary:hover { color: #D32F2F; }
-        .sos-share-section { text-align: center; margin-top: 8px; }
+        .sos-share-section {
+            text-align: center;
+            margin-top: 8px;
+        }
         .sos-content {
             max-width: 900px;
             margin: 0 auto;
@@ -250,8 +262,15 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #e0e0e0;
         }
-        .sos-section-title i { margin-right: 8px; color: #ED3237; }
-        .sos-features-list { list-style: none; padding: 0; margin: 0; }
+        .sos-section-title i {
+            margin-right: 8px;
+            color: #ED3237;
+        }
+        .sos-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
         .sos-features-list li {
             padding: 8px 0;
             display: flex;
@@ -300,7 +319,10 @@
             align-items: center;
             gap: 8px;
         }
-        .sos-expect-box ol { margin: 0; padding-left: 18px; }
+        .sos-expect-box ol {
+            margin: 0;
+            padding-left: 18px;
+        }
         .sos-expect-box li {
             font-size: 13px;
             color: #BF360C;
@@ -323,7 +345,11 @@
             margin-right: 6px;
             color: #ED3237;
         }
-        .sos-changelog-items { list-style: none !important; padding: 0; margin: 0; }
+        .sos-changelog-items {
+            list-style: none !important;
+            padding: 0;
+            margin: 0;
+        }
         .sos-changelog-items li {
             color: #424242;
             font-size: 13px;
@@ -344,8 +370,32 @@
             border-radius: 6px;
             margin-bottom: 20px;
         }
-        .sos-trust-box p { font-size: 12px; color: #424242; margin: 0; }
-        .sos-trust-box i { color: #ED3237; margin-right: 6px; }
+        .sos-trust-box p {
+            font-size: 12px;
+            color: #424242;
+            margin: 0;
+        }
+        .sos-trust-box i {
+            color: #ED3237;
+            margin-right: 6px;
+        }
+        .sos-downloads {
+            background: #FFEBEE;
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+        }
+        .sos-downloads-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ED3237;
+            margin: 0;
+        }
+        .sos-downloads-label {
+            font-size: 13px;
+            color: #424242;
+            margin: 5px 0 0 0;
+        }
         .sos-about-section {
             max-width: 900px;
             margin: 0 auto;
@@ -423,7 +473,10 @@
             font-size: 13px;
             color: #424242;
         }
-        .sos-footer-links { display: flex; gap: 20px; }
+        .sos-footer-links {
+            display: flex;
+            gap: 20px;
+        }
         .sos-footer-links a {
             color: #ED3237;
             text-decoration: none;
@@ -436,7 +489,11 @@
                 align-items: center;
                 text-align: center;
             }
-            .sos-icon { width: 120px; height: 120px; padding: 15px; }
+            .sos-icon {
+                width: 120px;
+                height: 120px;
+                padding: 15px;
+            }
             .sos-title { font-size: 24px; }
             .sos-content { grid-template-columns: 1fr; }
             .sos-buttons { flex-direction: column; }
@@ -447,10 +504,11 @@
 </head>
 <body>
 
+    <!-- Download Overlay -->
     <div class="sos-install-overlay" id="sos-overlay">
         <div class="sos-install-content">
             <div class="sos-install-icon">
-                <img src="https://brandweaversa.github.io/sos-panic-button/app_icon.png" alt="SOS Panic Button">
+                <img src="ICON_URL_HERE" alt="SOS Panic Button">
             </div>
             <div class="sos-install-status" id="sos-status">
                 <i class="fas fa-download"></i> Downloading SOS Panic Button
@@ -475,11 +533,12 @@
         </div>
     </div>
 
+    <!-- Main Page -->
     <div class="sos-container">
         <div class="sos-header">
             <div class="sos-header-content">
                 <div class="sos-icon">
-                    <img src="https://brandweaversa.github.io/sos-panic-button/app_icon.png" alt="SOS Panic Button">
+                    <img src="ICON_URL_HERE" alt="SOS Panic Button">
                 </div>
                 <div class="sos-info">
                     <h1 class="sos-title"><i class="fas fa-bell"></i> SOS Panic Button</h1>
@@ -515,6 +574,7 @@
             </div>
         </div>
 
+        <!-- Content -->
         <div class="sos-content">
             <div>
                 <div>
@@ -560,6 +620,7 @@
                 </div>
             </div>
 
+            <!-- Sidebar -->
             <div class="sos-sidebar">
                 <div>
                     <div class="sos-badge">
@@ -591,17 +652,154 @@
                     <p style="font-size: 13px; color: #424242; margin: 0 0 10px 0;">
                         Contact Brandweaver
                     </p>
-                    <a href="mailto:myhelpacenter@gmail.com" style="color: #ED3237; text-decoration: none; font-weight: 600; font-size: 13px;">
-                        <i class="fas fa-envelope"></i> myhelpacenter@gmail.com
+                    <a href="mailto:YOUR_EMAIL_HERE" style="color: #ED3237; text-decoration: none; font-weight: 600; font-size: 13px;">
+                        <i class="fas fa-envelope"></i> YOUR_EMAIL_HERE
                     </a>
                 </div>
             </div>
         </div>
 
+        <!-- About Section -->
         <div class="sos-about-section">
             <h2 class="sos-about-title">
                 <i class="fas fa-info-circle"></i> About this app
             </h2>
             <div class="sos-about-content">
                 <p>SOS Panic Button is a free safety app that lets you alert your trusted contacts with your live location in an emergency.</p>
-                <p>Hold a volume button for 3 seconds to
+                <p>Hold a volume button for 3 seconds to trigger SOS. Your phone vibrates to confirm, then fetches your GPS location and sends an alert to your contacts. Their phones sound a loud alarm — even on the lock screen — and they can see your live position on a map in real time.</p>
+                <p>The app uses your data connection only — no SMS, no airtime. It works on Android 11 and above, and survives app close and device restart so you're always protected.</p>
+                <p><strong>Powered by Brandweaver</strong> — free, open, and built to help.</p>
+            </div>
+            <div class="sos-about-meta">
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Updated on</span>
+                    <span class="sos-about-meta-value">November 2026</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Size</span>
+                    <span class="sos-about-meta-value">~24 MB</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Version</span>
+                    <span class="sos-about-meta-value">1.3.0</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Developer</span>
+                    <span class="sos-about-meta-value">Brandweaver</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Requires</span>
+                    <span class="sos-about-meta-value">Android 11+</span>
+                </div>
+            </div>
+            <div class="sos-about-tags">
+                <span class="sos-tag">Safety</span>
+                <span class="sos-tag">Emergency</span>
+                <span class="sos-tag">Utilities</span>
+                <span class="sos-tag">Personal Safety</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="sos-footer">
+            <div class="sos-footer-content">
+                <div><i class="fas fa-copyright"></i> 2026 Brandweaver. Powered by Brandweaver.</div>
+                <div class="sos-footer-links">
+                    <a href="PRIVACY_POLICY_URL_HERE" target="_blank">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="mailto:YOUR_EMAIL_HERE">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const installBtn = document.getElementById('sos-install-btn');
+    const overlay = document.getElementById('sos-overlay');
+    const progressFill = document.getElementById('sos-progress-fill');
+    const percentText = document.getElementById('sos-percent');
+    const statusText = document.getElementById('sos-status');
+    const messageText = document.getElementById('sos-message');
+    const shareBtn = document.getElementById('sos-share-btn');
+    const primePanel = document.getElementById('sos-prime-panel');
+    const dotsRow = document.getElementById('sos-dots-row');
+
+    // REPLACE THIS with your actual APK download URL
+    const APK_URL = 'APK_DOWNLOAD_URL_HERE';
+
+    installBtn.addEventListener('click', function() {
+        overlay.classList.add('active');
+        installBtn.disabled = true;
+        primePanel.classList.remove('active');
+        dotsRow.style.display = 'block';
+
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += Math.random() * 25;
+            if (progress > 95) progress = 95;
+            progressFill.style.width = progress + '%';
+            percentText.textContent = Math.floor(progress) + '%';
+
+            if (progress < 30) {
+                messageText.textContent = 'Downloading app files...';
+            } else if (progress < 70) {
+                messageText.textContent = 'Verifying package...';
+            } else {
+                messageText.textContent = 'Preparing download...';
+            }
+        }, 400);
+
+        // Simulate the download prep, then redirect to the actual APK
+        setTimeout(() => {
+            clearInterval(progressInterval);
+            progressFill.style.width = '100%';
+            percentText.textContent = '100%';
+            messageText.textContent = 'Ready to download';
+            statusText.innerHTML = '<i class="fas fa-check-circle"></i> Download Ready';
+
+            dotsRow.style.display = 'none';
+            primePanel.classList.add('active');
+
+            setTimeout(() => {
+                window.location.href = APK_URL;
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    installBtn.disabled = false;
+                    progressFill.style.width = '0%';
+                    percentText.textContent = '0%';
+                    statusText.innerHTML = '<i class="fas fa-download"></i> Downloading SOS Panic Button';
+                    messageText.textContent = 'Downloading app files';
+                    primePanel.classList.remove('active');
+                    dotsRow.style.display = 'block';
+                }, 4000);
+            }, 2200);
+        }, 3000);
+    });
+
+    shareBtn.addEventListener('click', function() {
+        const shareUrl = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: 'SOS Panic Button',
+                text: 'Download SOS Panic Button — free safety app for Android',
+                url: shareUrl
+            });
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = shareUrl;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Link copied to clipboard!');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
