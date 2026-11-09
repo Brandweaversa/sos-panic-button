@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — SOS Panic Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FAFAFA;
+            color: #212121;
+            line-height: 1.6;
+        }
+        .privacy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #ED3237;
+        }
+        .privacy-header h1 {
+            font-size: 32px;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+        .privacy-header .brand {
+            color: #ED3237;
+            font-weight: 600;
+        }
+        .privacy-header .updated {
+            font-size: 13px;
+            color: #757575;
+        }
+        .privacy-section {
+            margin-bottom: 30px;
+        }
+        .privacy-section h2 {
+            font-size: 20px;
+            color: #1a202c;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .privacy-section h2 i {
+            color: #ED3237;
+        }
+        .privacy-section p {
+            color: #424242;
+            margin-bottom: 10px;
+        }
+        .privacy-section ul {
+            padding-left: 20px;
+            color: #424242;
+            margin-bottom: 10px;
+        }
+        .privacy-section ul li {
+            margin-bottom: 6px;
+        }
+        .privacy-section strong {
+            color: #1a202c;
+        }
+        .privacy-callout {
+            background: #FFEBEE;
+            border-left: 4px solid #ED3237;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .privacy-callout p {
+            margin: 0;
+            color: #424242;
+        }
+        .privacy-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #757575;
+            font-size: 13px;
+        }
+        .privacy-footer a {
+            color: #ED3237;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .privacy-container { padding: 20px; }
+            .privacy-header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="privacy-container">
+        <div class="privacy-header">
+            <h1>Privacy Policy</h1>
+            <p class="brand"><i class="fas fa-bell"></i> SOS Panic Button — Powered by Brandweaver</p>
+            <p class="updated">Last updated: November 2026</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-info-circle"></i> Overview</h2>
+            <p>SOS Panic Button is a free safety app that lets you alert your trusted contacts with your live location in an emergency. We are committed to protecting your privacy and being transparent about how your data is handled.</p>
+            <p><strong>This app does NOT collect, sell, or share your personal data with any third parties.</strong></p>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Location Data</h2>
+            <p><strong>When location data is collected:</strong></p>
+            <ul>
+                <li>Only when you trigger an SOS (by holding the volume button for 3 seconds)</li>
+                <li>Only during an active live tracking session</li>
+                <li>Stops the moment you (or a receiver) tap "Stop"</li>
+            </ul>
+            <p><strong>Who receives your location:</strong></p>
+            <ul>
+                <li>Only the phone numbers you manually add to your "Receivers" list in Settings</li>
+                <li>Receivers can view your live position on a map during the active SOS session</li>
+            </ul>
+            <div class="privacy-callout">
+                <p><i class="fas fa-shield-alt"></i> <strong>Your location is NEVER sent to Brandweaver, never stored on our servers, and never shared with advertisers.</strong></p>
+            </div>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-database"></i> Firebase Anonymous Authentication</h2>
+            <p>The app uses Firebase Anonymous Authentication to secure the real-time database. This generates a random, anonymous ID for your device.</p>
+            <ul>
+                <li>The ID is not linked to your name, phone number, or email</li>
+                <li>The ID resets when you uninstall the app</li>
+                <li>It cannot be used to identify you personally</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-phone"></i> Phone Number</h2>
+            <p>The app stores <strong>your phone number</strong> and <strong>your receivers' phone numbers</strong> locally on your device, using Android's secure SharedPreferences.</p>
+            <ul>
+                <li>Phone numbers are used only to route SOS alerts to the correct receivers</li>
+                <li>They are stored only on your device — never uploaded to Brandweaver</li>
+                <li>They are removed when you uninstall the app</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-microchip"></i> Data Stored on Your Device</h2>
+            <p>The app stores the following locally on your device:</p>
+            <ul>
+                <li>Your name (so receivers know who's in trouble)</li>
+                <li>Your phone number</li>
+                <li>Your receivers' phone numbers</li>
+                <li>SOS event history (timestamps, trigger source, location)</li>
+                <li>App preferences (Receiver Mode on/off, monitoring on/off)</li>
+            </ul>
+            <p>All of this data is removed when you uninstall the app.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-ban"></i> What We DON'T Do</h2>
+            <ul>
+                <li><strong>No analytics</strong> — we don't track how you use the app</li>
+                <li><strong>No advertising</strong> — the app is ad-free</li>
+                <li><strong>No third-party tracking</strong> — no Google Analytics, no Facebook SDK, no ad networks</li>
+                <li><strong>No data selling</strong> — your data is never sold or shared</li>
+                <li><strong>No background location tracking</strong> — location is only collected during active SOS</li>
+                <li><strong>No SMS access</strong> — the app uses data only, not SMS</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-user-shield"></i> Your Rights</h2>
+            <p>You have full control over your data:</p>
+            <ul>
+                <li><strong>Delete your data</strong>: Uninstall the app — all local data is removed</li>
+                <li><strong>Stop sharing location</strong>: Tap "Stop" on the live tracking screen, or simply don't trigger an SOS</li>
+                <li><strong>Remove receivers</strong>: Go to Settings → swipe to remove any receiver</li>
+                <li><strong>Disable the app</strong>: Toggle off "Receiver Mode" and "Activate monitoring" in the app</li>
+            </ul>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-child"></i> Children's Privacy</h2>
+            <p>This app is rated for users aged 12 and above. We do not knowingly collect any data from children under 12. If you believe a child has provided personal information, please contact us so we can delete it.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or the app's data practices, please contact:</p>
+            <p><strong>Brandweaver</strong></p>
+            <p>Email: <a href="mailto:myhelpacenter@gmail.com" style="color: #ED3237;">myhelpacenter@gmail.com</a></p>
+        </div>
+
+        <div class="privacy-section">
+            <h2><i class="fas fa-edit"></i> Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this page periodically.</p>
+        </div>
+
+        <div class="privacy-footer">
+            <p>&copy; 2026 Brandweaver. Powered by Brandweaver.</p>
+            <p><a href="https://brandweaversa.github.io/sos-panic-button/">&larr; Back to download page</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
