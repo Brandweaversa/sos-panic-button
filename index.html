@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOS Panic Button — Download</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FAFAFA;
+            color: #212121;
+            line-height: 1.5;
+        }
+
+        /* Download overlay */
+        .sos-install-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+        }
+        .sos-install-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sos-install-content {
+            text-align: center;
+            color: white;
+            max-width: 400px;
+            border-radius: 18px;
+            padding: 0 20px;
+        }
+        .sos-install-icon {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            background-color: #fff !important;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .sos-install-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #fff !important;
+            padding: 20px !important;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .sos-install-status {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .sos-install-message {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .sos-install-progress {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .sos-install-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ED3237 0%, #D32F2F 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .sos-install-percent {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .sos-install-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ED3237;
+            border-radius: 50%;
+            margin: 0 4px;
+            animation: bounce 1.4s infinite;
+        }
+        .sos-install-dot:nth-child(1) { animation-delay: 0s; }
+        .sos-install-dot:nth-child(2) { animation-delay: 0.2s; }
+        .sos-install-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .sos-prime-panel {
+            display: none;
+            text-align: left;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(237,50,55,0.4);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: 10px;
+        }
+        .sos-prime-panel.active { display: block; }
+        .sos-prime-panel h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            color: #ffcccb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sos-prime-panel p {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            color: #d1d5db;
+            line-height: 1.5;
+        }
+        .sos-prime-panel p:last-child { margin-bottom: 0; }
+        .sos-prime-panel strong { color: #fff; }
+
+        /* Main container */
+        .sos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .sos-header {
+            padding: 10px 0px;
+            border-radius: 18px;
+        }
+        .sos-header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+        .sos-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            background-color: #fff !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+        .sos-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .sos-info { flex: 1; }
+        .sos-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sos-developer {
+            color: #ED3237;
+            font-size: 14px;
+            margin: 5px 0 15px 0;
+        }
+        .sos-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .sos-meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .sos-meta-item-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        .sos-meta-item-label {
+            font-size: 12px;
+            color: #757575;
+        }
+        .sos-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .sos-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 550px;
+        }
+        .sos-btn-primary {
+            background: linear-gradient(135deg, #ED3237 0%, #D32F2F 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(237,50,55,0.3);
+        }
+        .sos-btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(237,50,55,0.4);
+        }
+        .sos-btn-secondary {
+            background: transparent;
+            color: #ED3237;
+            padding: 10px 16px;
+            width: auto;
+            max-width: 200px;
+        }
+        .sos-btn-secondary:hover { color: #D32F2F; }
+        .sos-share-section {
+            text-align: center;
+            margin-top: 8px;
+        }
+        .sos-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        .sos-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .sos-section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .sos-section-title i {
+            margin-right: 8px;
+            color: #ED3237;
+        }
+        .sos-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sos-features-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #424242;
+            font-size: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .sos-features-list li:last-child { border-bottom: none; }
+        .sos-feature-check {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ED3237 0%, #D32F2F 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .sos-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: #FFEBEE;
+            color: #B71C1C;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .sos-expect-box {
+            background: #FFF8E1;
+            border: 1px solid #FFE082;
+            padding: 18px;
+            border-radius: 12px;
+        }
+        .sos-expect-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #E65100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sos-expect-box ol {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .sos-expect-box li {
+            font-size: 13px;
+            color: #BF360C;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .sos-expect-box li:last-child { margin-bottom: 0; }
+        .sos-changelog {
+            background: #FFEBEE;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .sos-changelog-version {
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .sos-changelog-version i {
+            margin-right: 6px;
+            color: #ED3237;
+        }
+        .sos-changelog-items {
+            list-style: none !important;
+            padding: 0;
+            margin: 0;
+        }
+        .sos-changelog-items li {
+            color: #424242;
+            font-size: 13px;
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+        .sos-changelog-items li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #ED3237;
+            font-weight: bold;
+        }
+        .sos-trust-box {
+            background: #FFEBEE;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .sos-trust-box p {
+            font-size: 12px;
+            color: #424242;
+            margin: 0;
+        }
+        .sos-trust-box i {
+            color: #ED3237;
+            margin-right: 6px;
+        }
+        .sos-downloads {
+            background: #FFEBEE;
+            padding: 20px;
+            border-radius: 18px;
+            text-align: center;
+        }
+        .sos-downloads-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ED3237;
+            margin: 0;
+        }
+        .sos-downloads-label {
+            font-size: 13px;
+            color: #424242;
+            margin: 5px 0 0 0;
+        }
+        .sos-about-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .sos-about-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sos-about-title i { color: #ED3237; }
+        .sos-about-content {
+            color: #424242;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .sos-about-content p { margin-bottom: 10px; }
+        .sos-about-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background: #FFEBEE;
+            border-radius: 18px;
+        }
+        .sos-about-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .sos-about-meta-label {
+            font-size: 12px;
+            color: #424242;
+            font-weight: 600;
+        }
+        .sos-about-meta-value {
+            font-size: 13px;
+            color: #1a202c;
+        }
+        .sos-about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        .sos-tag {
+            background: #fff;
+            border: 1px solid #ED3237;
+            color: #424242;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .sos-footer {
+            background: #f8f9fa;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-radius: 18px;
+        }
+        .sos-footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 13px;
+            color: #424242;
+        }
+        .sos-footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        .sos-footer-links a {
+            color: #ED3237;
+            text-decoration: none;
+        }
+        .sos-footer-links a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .sos-header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .sos-icon {
+                width: 120px;
+                height: 120px;
+                padding: 15px;
+            }
+            .sos-title { font-size: 24px; }
+            .sos-content { grid-template-columns: 1fr; }
+            .sos-buttons { flex-direction: column; }
+            .sos-btn { width: 100%; max-width: 550px; }
+            .sos-about-meta { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Download Overlay -->
+    <div class="sos-install-overlay" id="sos-overlay">
+        <div class="sos-install-content">
+            <div class="sos-install-icon">
+                <img src="ICON_URL_HERE" alt="SOS Panic Button">
+            </div>
+            <div class="sos-install-status" id="sos-status">
+                <i class="fas fa-download"></i> Downloading SOS Panic Button
+            </div>
+            <div class="sos-install-message" id="sos-message">
+                Downloading app files
+            </div>
+            <div class="sos-install-progress">
+                <div class="sos-install-progress-fill" id="sos-progress-fill"></div>
+            </div>
+            <div class="sos-install-percent" id="sos-percent">0%</div>
+            <div id="sos-dots-row">
+                <div class="sos-install-dot"></div>
+                <div class="sos-install-dot"></div>
+                <div class="sos-install-dot"></div>
+            </div>
+            <div class="sos-prime-panel" id="sos-prime-panel">
+                <h4><i class="fas fa-shield-alt"></i> Before you continue</h4>
+                <p>Since SOS Panic Button isn't installed through the Play Store, Android may show a security prompt during installation. <strong>This is normal and expected</strong> for apps installed this way.</p>
+                <p>If you see a warning, tap <strong>"Install anyway"</strong> or <strong>"Settings"</strong> and allow installs from this browser to continue.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Page -->
+    <div class="sos-container">
+        <div class="sos-header">
+            <div class="sos-header-content">
+                <div class="sos-icon">
+                    <img src="ICON_URL_HERE" alt="SOS Panic Button">
+                </div>
+                <div class="sos-info">
+                    <h1 class="sos-title"><i class="fas fa-bell"></i> SOS Panic Button</h1>
+                    <p class="sos-developer"><i class="fas fa-building"></i> Brandweaver</p>
+                    <div class="sos-meta">
+                        <div class="sos-meta-item">
+                            <div class="sos-meta-item-value"><i class="fas fa-star" style="color: #fbbf24;"></i> Rated for 12+</div>
+                            <div class="sos-meta-item-label">Content Rating</div>
+                        </div>
+                        <div class="sos-meta-item">
+                            <div class="sos-meta-item-value"><i class="fas fa-globe"></i> South Africa 🇿🇦</div>
+                            <div class="sos-meta-item-label">Made in</div>
+                        </div>
+                        <div class="sos-meta-item">
+                            <div class="sos-meta-item-value"><i class="fas fa-mobile-alt"></i> Android 11+</div>
+                            <div class="sos-meta-item-label">Requires</div>
+                        </div>
+                    </div>
+                    <div class="sos-buttons">
+                        <button class="sos-btn sos-btn-primary" id="sos-install-btn">
+                            <i class="fas fa-download"></i> <span>Download APK</span>
+                        </button>
+                    </div>
+                    <div class="sos-share-section">
+                        <button class="sos-btn sos-btn-secondary" id="sos-share-btn">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                    <p style="font-size: 13px; color: #757575; margin-top: 15px;">
+                        <i class="fas fa-check-circle" style="color: #ED3237;"></i> Free — no ads, no SMS costs, no tracking
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="sos-content">
+            <div>
+                <div>
+                    <h3 class="sos-section-title"><i class="fas fa-star"></i> Key Features</h3>
+                    <ul class="sos-features-list">
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Hold volume 3 seconds to trigger SOS</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Live location sent to your contacts</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Receivers' phones alarm even on lock screen</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Live tracking with real-time map</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Survives app close and device restart</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Data-only — no SMS, no airtime</li>
+                        <li><div class="sos-feature-check"><i class="fas fa-check"></i></div> Vibration feedback when SOS fires</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 class="sos-section-title"><i class="fas fa-shield-alt"></i> What to Expect During Install</h3>
+                    <div class="sos-expect-box">
+                        <h4><i class="fas fa-info-circle"></i> This is normal, not a bug</h4>
+                        <ol>
+                            <li>Since SOS Panic Button isn't distributed through the Play Store, Android will show a routine <strong>"Install unknown app"</strong> prompt the first time.</li>
+                            <li>Tap <strong>Settings</strong> in that prompt, then allow installs from your browser.</li>
+                            <li>Go back and tap install again — this permission is only asked once per browser.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 class="sos-section-title"><i class="fas fa-newspaper"></i> What's New</h3>
+                    <div class="sos-changelog">
+                        <div class="sos-changelog-version"><i class="fas fa-tag"></i> Version 1.3.0 (Latest)</div>
+                        <ul class="sos-changelog-items">
+                            <li>3-second volume long-press trigger</li>
+                            <li>Live tracking with real-time map</li>
+                            <li>Red SOS alarm screen over lock screen</li>
+                            <li>Persistent receiver service (survives reboot)</li>
+                            <li>SOS Requests tab — view active and past SOS</li>
+                            <li>Swipe-to-navigate between tabs</li>
+                            <li>Custom app icon and brand splash screen</li>
+                            <li>Data-only alerts — no SMS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sos-sidebar">
+                <div>
+                    <div class="sos-badge">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Download</span>
+                    </div>
+                </div>
+
+                <div class="sos-trust-box">
+                    <p><i class="fas fa-check"></i> <strong>Officially signed APK</strong></p>
+                    <p style="margin-top: 8px;"><i class="fas fa-shield-alt"></i> Free, open, no tracking</p>
+                </div>
+
+                <div>
+                    <p style="font-size: 14px; color: #1a202c; margin-bottom: 5px; font-weight: 600;">
+                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                        <i class="fas fa-star" style="color: #fbbf24;"></i>
+                    </p>
+                    <p style="font-size: 13px; color: #757575; margin: 0;"><i class="fas fa-info-circle"></i> Rated for 12+</p>
+                </div>
+
+                <div style="background: #FFEBEE; padding: 20px; border-radius: 8px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #1a202c;">
+                        <i class="fas fa-headset"></i> Need Help?
+                    </h4>
+                    <p style="font-size: 13px; color: #424242; margin: 0 0 10px 0;">
+                        Contact Brandweaver
+                    </p>
+                    <a href="mailto:YOUR_EMAIL_HERE" style="color: #ED3237; text-decoration: none; font-weight: 600; font-size: 13px;">
+                        <i class="fas fa-envelope"></i> YOUR_EMAIL_HERE
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="sos-about-section">
+            <h2 class="sos-about-title">
+                <i class="fas fa-info-circle"></i> About this app
+            </h2>
+            <div class="sos-about-content">
+                <p>SOS Panic Button is a free safety app that lets you alert your trusted contacts with your live location in an emergency.</p>
+                <p>Hold a volume button for 3 seconds to trigger SOS. Your phone vibrates to confirm, then fetches your GPS location and sends an alert to your contacts. Their phones sound a loud alarm — even on the lock screen — and they can see your live position on a map in real time.</p>
+                <p>The app uses your data connection only — no SMS, no airtime. It works on Android 11 and above, and survives app close and device restart so you're always protected.</p>
+                <p><strong>Powered by Brandweaver</strong> — free, open, and built to help.</p>
+            </div>
+            <div class="sos-about-meta">
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Updated on</span>
+                    <span class="sos-about-meta-value">November 2026</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Size</span>
+                    <span class="sos-about-meta-value">~24 MB</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Version</span>
+                    <span class="sos-about-meta-value">1.3.0</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Developer</span>
+                    <span class="sos-about-meta-value">Brandweaver</span>
+                </div>
+                <div class="sos-about-meta-item">
+                    <span class="sos-about-meta-label">Requires</span>
+                    <span class="sos-about-meta-value">Android 11+</span>
+                </div>
+            </div>
+            <div class="sos-about-tags">
+                <span class="sos-tag">Safety</span>
+                <span class="sos-tag">Emergency</span>
+                <span class="sos-tag">Utilities</span>
+                <span class="sos-tag">Personal Safety</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="sos-footer">
+            <div class="sos-footer-content">
+                <div><i class="fas fa-copyright"></i> 2026 Brandweaver. Powered by Brandweaver.</div>
+                <div class="sos-footer-links">
+                    <a href="PRIVACY_POLICY_URL_HERE" target="_blank">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </a>
+                    <a href="mailto:YOUR_EMAIL_HERE">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const installBtn = document.getElementById('sos-install-btn');
+    const overlay = document.getElementById('sos-overlay');
+    const progressFill = document.getElementById('sos-progress-fill');
+    const percentText = document.getElementById('sos-percent');
+    const statusText = document.getElementById('sos-status');
+    const messageText = document.getElementById('sos-message');
+    const shareBtn = document.getElementById('sos-share-btn');
+    const primePanel = document.getElementById('sos-prime-panel');
+    const dotsRow = document.getElementById('sos-dots-row');
+
+    // REPLACE THIS with your actual APK download URL
+    const APK_URL = 'APK_DOWNLOAD_URL_HERE';
+
+    installBtn.addEventListener('click', function() {
+        overlay.classList.add('active');
+        installBtn.disabled = true;
+        primePanel.classList.remove('active');
+        dotsRow.style.display = 'block';
+
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += Math.random() * 25;
+            if (progress > 95) progress = 95;
+            progressFill.style.width = progress + '%';
+            percentText.textContent = Math.floor(progress) + '%';
+
+            if (progress < 30) {
+                messageText.textContent = 'Downloading app files...';
+            } else if (progress < 70) {
+                messageText.textContent = 'Verifying package...';
+            } else {
+                messageText.textContent = 'Preparing download...';
+            }
+        }, 400);
+
+        // Simulate the download prep, then redirect to the actual APK
+        setTimeout(() => {
+            clearInterval(progressInterval);
+            progressFill.style.width = '100%';
+            percentText.textContent = '100%';
+            messageText.textContent = 'Ready to download';
+            statusText.innerHTML = '<i class="fas fa-check-circle"></i> Download Ready';
+
+            dotsRow.style.display = 'none';
+            primePanel.classList.add('active');
+
+            setTimeout(() => {
+                window.location.href = APK_URL;
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    installBtn.disabled = false;
+                    progressFill.style.width = '0%';
+                    percentText.textContent = '0%';
+                    statusText.innerHTML = '<i class="fas fa-download"></i> Downloading SOS Panic Button';
+                    messageText.textContent = 'Downloading app files';
+                    primePanel.classList.remove('active');
+                    dotsRow.style.display = 'block';
+                }, 4000);
+            }, 2200);
+        }, 3000);
+    });
+
+    shareBtn.addEventListener('click', function() {
+        const shareUrl = window.location.href;
+        if (navigator.share) {
+            navigator.share({
+                title: 'SOS Panic Button',
+                text: 'Download SOS Panic Button — free safety app for Android',
+                url: shareUrl
+            });
+        } else {
+            const textarea = document.createElement('textarea');
+            textarea.value = shareUrl;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Link copied to clipboard!');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
